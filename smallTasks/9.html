@@ -11,21 +11,6 @@ compress('aaabbc') // 'a3b2c1'
 compress('aabbcca') // 'a2b2c2a1'
 
 <script>
-    //через объект
-    /*function compress(str) {
-        const map = {};
-
-        for (let i = 0; i < str.length; i++) {
-            const letter = str[i];
-            map[letter] = map[letter] ? map[letter] + 1 : 1;
-        }
-
-        const result = Object.keys(map).reduce((acc, key) => `${acc}${key}${map[key]}`, "");
-
-        return result;
-    }*/
-
-    //через строку
     function compress(str) {
         let newStr = "";
         let count = 1;
