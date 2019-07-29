@@ -1,0 +1,200 @@
+<meta charset="UTF-8">
+<script>
+    'use strict';
+
+    const questions = [
+        {
+            text: 'Сколько планет в солнечной системе?',
+            variants: {
+                'a': 'Восемь',
+                'b': 'Пять',
+                'c': 'Одна Земля',
+                'd': 'Семь',
+            },
+            correctAnswerIndex: 'a',
+        },
+        {
+            text: 'Самая большая планета в солнечной системе?',
+            variants: {
+                'a': 'Меркурий',
+                'b': 'Земля',
+                'c': 'Солнце',
+                'd': 'Юпитер',
+            },
+            correctAnswerIndex: 'd',
+        },
+        {
+            text: 'Сколько спутников у Земли?',
+            variants: {
+                'a': 'Нет',
+                'b': 'Два',
+                'c': 'Один',
+                'd': 'Одиннадцать',
+            },
+            correctAnswerIndex: 'c',
+        },
+        {
+            text: 'Ближайшая планета к Солнцу?',
+            variants: {
+                'a': 'Земля',
+                'b': 'Юпитер',
+                'c': 'Меркурий',
+                'd': 'Венера',
+            },
+            correctAnswerIndex: 'b',
+        },
+        {
+            text: 'Самая горячая планета в солнечной системе',
+            variants: {
+                'a': 'Земля',
+                'b': 'Марс',
+                'c': 'Венера',
+                'd': 'Меркурий',
+            },
+            correctAnswerIndex: 'c',
+        }
+    ];
+
+    /**
+     * @property {questions} questions Массив с объектами вопросов.
+     * @property {int} scoreCount Счетчик правильных ответов.
+     * @property {int} questionIndex Индекс текущего вопроса.
+     */
+    const game = {
+        questions,
+        scoreCount: null,
+        questionIndex: null,
+
+        /**
+         * Инициализация игры.
+         */
+        init() {
+            this.scoreCount = 0;
+            this.questionIndex = 0;
+        },
+
+        /**
+         * Запуск игры.
+         */
+        run() {
+            this.init();
+
+            alert("Добрый день! Поиграем? Я буду задавать вопросы и предлагать варианты ответа. А тебе нужно выбрать" +
+                " правильный ответ. Если хочешь закончить игру набери -1");
+
+            while (true) {
+                const userAnswer = this.getAnswer();
+
+                if (this.userWantExit(userAnswer)) {
+                    alert("До свидания.");
+                    break;
+                }
+
+                if (this.isAnswerCorrect(userAnswer)) {
+                    alert("Правильный ответ!");
+                    this.scoreCount++;
+                } else {
+                    alert("Ответ не верный!");
+                }
+
+                this.questionIndex++;
+
+                if (this.isGameOver()) {
+                    alert(`Игра закончена. Вы набрали ${this.scoreCount}`);
+
+                    if(!confirm("Хотите сыграть еще одну игру?")){
+                        break;
+                    }
+
+                    this.init();
+                }
+            }
+        },
+        /**
+         * Получает ответ от пользователя
+         * @return {string} строка ответа пользователя
+         */
+        getAnswer() {
+            while (true) {
+                let answer = prompt(this.getCurrentQuestionString());
+
+                if (answer === null) {
+                    alert("Если хочешь закончить игру набери -1");
+                    continue;
+                }
+                //trim -  удаляет пробелы по бокам
+                answer = answer.trim().toLowerCase();
+
+                if (!this.validateAnswer(answer)) {
+                    alert("`Не корректно введен ответ");
+                    continue;
+                }
+
+                return answer;
+            }
+        },
+
+        /**
+         * Возвращает строку с текущим вопросом и вариантами ответов.
+         * @returns {string} Строку с текущим вопросом и вариантами ответов.
+         */
+        getCurrentQuestionString() {
+            const question = this.questions[this.questionIndex];
+            const text = question.text;
+
+            let variants = "";
+            for (const key in question.variants) {
+                if (question.variants.hasOwnProperty(key)) {
+                    variants += `${key} - ${question.variants[key]}, `;
+                }
+            }
+
+            return text + " " + variants;
+        },
+
+        /**
+         * Проверяем ответ пользователя на корректность ввода.
+         * @param {string} userAnswer Ответ пользователя.
+         * @returns {boolean} true если пользователь ввел корректные данные, иначе false.
+         */
+        validateAnswer(userAnswer) {
+            /*const availableUserAnswer = ["-1", "a", "b", "c", "d"];
+
+            if (!availableUserAnswer.includes(userAnswer)) {
+                alert(`Не корректно введен ответ, должен быть один из этих: ${availableUserAnswer.join(", ")}`);
+                return false;
+            }
+            return true;*/
+            return ["-1", "a", "b", "c", "d"].indexOf(userAnswer) !== -1;
+        },
+
+        /**
+         * Проверяет ввел ли пользователь вместо ответа информацию для выхода из игры.
+         * @param {string} userAnswer Ответ пользователя.
+         * @returns {boolean} true, если пользователь хотел выйти, false если нет.
+         */
+        userWantExit(userAnswer) {
+            return userAnswer === "-1";
+        },
+
+        /**
+         * Проверяет является ли ответ, переданный в функцию верным.
+         * @param {string} userAnswer Ответ пользователя.
+         * @returns {boolean} true, если ответ пользователя верный, false если нет.
+         */
+        isAnswerCorrect(userAnswer) {
+            return this.questions[this.questionIndex].correctAnswerIndex === userAnswer;
+        },
+
+        /**
+         * Проверяет закончилась ли игра.
+         * @returns {boolean} true, если было задано 5 вопросов, иначе false.
+         */
+        isGameOver() {
+            return this.questionIndex === 5;
+        }
+    };
+
+    // Запускаем игру.
+    game.run();
+</script>
