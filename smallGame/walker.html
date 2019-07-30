@@ -1,0 +1,142 @@
+<meta charset="UTF-8">
+<script>
+    'use strict';
+
+    const settings = {
+        rowsCount: 10,
+        colsCount: 10,
+        startPositionX: 0,
+        startPositionY: 0,
+    };
+
+    const player = {
+        x: null,
+        y: null,
+
+        init(startX, startY) {
+            this.x = startX;
+            this.y = startY;
+        },
+
+        /**
+         * Отдает следующую точку в которой будет находиться пользователь после движения.
+         * @param {int} direction Направление движения игрока.
+         * @returns {{x: int, y: int}} Следующая позиция игрока.
+         */
+        getNextPosition(direction) {
+            const nextPosition = {
+                x: this.x,
+                y: this.y
+            };
+
+            switch (direction) {
+                case 2:
+                    nextPosition.y++;
+                    break;
+                case 4:
+                    nextPosition.x--;
+                    break;
+                case 6:
+                    nextPosition.x++;
+                    break;
+                case 8:
+                    nextPosition.y--;
+                    break;
+                case 1:
+                    nextPosition.x--;
+                    nextPosition.y++;
+                    break;
+                case 3:
+                    nextPosition.x++;
+                    nextPosition.y++;
+                    break;
+                case 7:
+                    nextPosition.x--;
+                    nextPosition.y--;
+                    break;
+                case 9:
+                    nextPosition.x++;
+                    nextPosition.y--;
+                    break;
+            }
+            return nextPosition;
+        },
+
+        /**
+         * Двигает игрока по переданному направлению.
+         * @param {{x: int, y: int}} nextPoint Следующая точка пользователя.
+         */
+        move(nextPoint) {
+            this.x = nextPoint.x;
+            this.y = nextPoint.y;
+        }
+    };
+
+    const game = {
+        settings,
+        player,
+
+        run() {
+            this.player.init(this.settings.startPositionX, this.settings.startPositionY);
+            while (true) {
+                this.render();
+
+                const direction = this.getDirection();
+
+                if (direction === -1) {
+                    return alert("До свидания.");
+                }
+
+                const nextPoint = this.player.getNextPosition(direction);
+
+                if (this.canPlayerMakeStep(nextPoint)) {
+                    this.player.move(nextPoint);
+                }
+            }
+        },
+
+        render() {
+            let map = "";
+
+            for (let row = 0; row < this.settings.rowsCount; row++) {
+                for (let col = 0; col < this.settings.colsCount; col++) {
+                    if (this.player.y === row && this.player.x === col) {
+                        map += "O ";
+                    } else {
+                        map += "X ";
+                    }
+                }
+                map += "\n";
+            }
+            console.clear();
+            console.log(map);
+        },
+
+        getDirection() {
+            const availableDirection = [-1, 1, 2, 3, 4, 6, 7, 8, 9];
+
+            while (true) {
+                const direction = parseInt(prompt("Введите число, куда вы хотите переместиться. Для выхода введите -1"));
+
+                if (!availableDirection.includes(direction)) {
+                    alert(`Для премещения необходимо ввести одно из чисел: ${availableDirection.join(", ")}`);
+                    continue;
+                }
+                return direction;
+            }
+        },
+
+        /**
+         * Проверяет может ли пользователь перейти на точку.
+         * @param {{x: int, y: int}} nextPoint Точка, которую проверяем.
+         * @returns {boolean} true если пользователь может перейти в направлении, false если нет.
+         */
+        canPlayerMakeStep(nextPoint) {
+            return nextPoint.x >= 0 && nextPoint.y < this.settings.rowsCount &&
+                nextPoint.y >= 0 && nextPoint.x < this.settings.colsCount;
+        },
+    };
+
+    game.run();
+</script>
+   
