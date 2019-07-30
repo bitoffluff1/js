@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+напишите функцию, которая принимает массив цен товаров и остаток денег на вашей карте.
+Функция должна вернуть максимальное количество товаров, которые вы сможете купить на все деньги.
+
+max([1, 2], 7) // 2
+max([1, 2, 10, 1], 2) // 2
+max([1, 2, 3, 4], 7) // 3
+max([3, 7, 2, 9, 4], 15) // 3
+
+<script>
+    function max(arr, sum) {
+        arr.sort((a, b) => a - b);
+
+        let goodsSum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            goodsSum += arr[i];
+            if (goodsSum > sum) {
+                return i;
+            }
+        }
+        return arr.length;
+    }
+
+    console.log(max([1, 2], 7));
+    console.log(max([1, 2, 10, 1], 2));
+    console.log(max([1, 2, 3, 4], 7));
+    console.log(max([3, 7, 2, 9, 4], 15));
+</script>
+
+</body>
+</html>
