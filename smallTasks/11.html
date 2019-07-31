@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+напишите функцию, которая проверяет, что строки являются анаграммами
+
+an('thing', 'NiGht'); // true
+an('dog', 'god'); // true
+an('wrong', 'answer'); // false
+
+<script>
+    function an(word1, word2) {
+        word1 = word1.toLowerCase();
+        word2 = word2.toLowerCase();
+
+        if (word1.length !== word2.length) {
+            return false;
+        }
+
+        for (let i = 0; i < word1.length; i++) {
+            if (!word2.includes(word1[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    console.log(an('thing', 'NiGht'));
+    console.log(an('dog', 'god'));
+    console.log(an('wrong', 'answer'));
+</script>
+
+</body>
+</html>
