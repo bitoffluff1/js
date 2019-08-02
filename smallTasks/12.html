@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Реализуйте аналог _.curry из lodash
+
+const curried = curry((a,b,c) => [a,b,c]);
+curried(1)(2)(3); // [1, 2, 3]
+curried(1)(2); // func
+
+<script>
+    function curried(a) {
+        return (b) => {
+            return (c) => {
+                return [a, b, c];
+            }
+        }
+    }
+
+    console.log(curried(1)(2)(3));
+    console.log(curried(1)(2));
+</script>
+
+</body>
+</html>
