@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Напишите функцию-валидатор скобок:
+correctBrackets('{[()]}') // true
+correctBrackets('{[(])}') // false
+
+<script>
+    function correctBrackets(brs) {
+        let opening = {
+            '[': ']',
+            '{': '}',
+            '(': ')'
+        };
+
+        let stack = [];
+
+        for (let i = 0; i < brs.length; i++) {
+            let c = brs[i];
+
+            if (opening[c]) {
+                stack.push(c);
+            } else {
+                if (stack.length === 0) {
+                    return false;
+                }
+
+                let br = stack.pop();
+
+                if (c !== opening[br]) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.length <= 0;
+    }
+
+    console.log(correctBrackets('{[()]}'));
+    console.log(correctBrackets('{[(])}'));
+</script>
+
+</body>
+</html>
