@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+задачка на знание синтаксиса JavaScript
+Напишите аналог _.get в lodash/underscore.
+
+Примеры:
+get({ a: { b: 1 } }, 'a.b') // 1
+get({ a: { b: 1 } }, 'a.c') // undefined
+get({ }, 'a.c') // undefined
+
+<script>
+    "use strict";
+
+    function get(obj, path, def) {
+        let res = path
+            .replace(/\[/g, '.')
+            .replace(/\]/g, '')
+            .replace(/^\./, '')
+            .split('.')
+            .reduce((prev, curr) => {
+                return prev && prev[curr]
+            }, obj);
+
+        return (res === undefined) ? def : res;
+    }
+
+    //console.log(get({a: {b: 1}}, 'a.b'));
+    //console.log(get({ a: { b: 1 } }, 'a.c'));
+    //console.log(get({ }, 'a.c'));
+    console.log(get({ 'a': [{ 'b': { 'c': 3 } }] }, '.a[0].b.c'));
+</script>
+
+</body>
+</html>
