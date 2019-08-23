@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+напишите сокращатель диапазонов чисел в отсортированном массиве уникальных значений.
+
+short([1, 2, 3, 4, 5, 6]) // "1-6"
+short([1, 2, 3, 5, 6, 8]) // "1-3, 5, 6, 8"
+short([-3, -2, -1, 1, 2, 3]) // "-3--1, 1-3"
+
+
+<script>
+    "use strict";
+
+    function short(arr) {
+        let res = [];
+        let interval = null;
+        let mark = true;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] + 1 === arr[i + 1]) {
+                if (mark) {
+                    interval = arr[i];
+                    mark = false;
+                }
+            } else {
+                if (!mark) {
+                    if (interval + 1 !== arr[i]) {
+                        res.push(`${interval}-${arr[i]}`);
+                    } else {
+                        res.push(interval, arr[i]);
+                    }
+                    mark = true;
+                } else {
+                    res.push(arr[i]);
+                }
+            }
+        }
+
+        return res.join(", ");
+    }
+
+    console.log(short([1, 2, 3, 4, 5, 6]));
+    console.log(short([1, 2, 3, 5, 6, 8]));
+    console.log(short([-3, -2, -1, 1, 2, 3]));
+
+</script>
+
+</body>
+</html>
