@@ -1,0 +1,121 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: montserrat, arial, verdana;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/*стили блока для ввода чисел */
+.box-userNumbers {
+    width: 600px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #2C3E50;
+    font-size: 22px;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+p{
+    color: #2C3E50;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+h4 {
+    color: #2C3E50;
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.userNumbers {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 8px;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 13px;
+    width: 70%;
+}
+
+.button {
+    width: 100px;
+    background: #7192b7;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+.button:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #7192b7;
+}
+
+/*стили для списков */
+.arr {
+    border: 1px solid sandybrown;
+    border-radius: 3px;
+    display: flex;
+    margin-bottom: 20px;
+    padding: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.arr_user{
+    background-color: aliceblue;
+}
+
+.arr_sort {
+    background-color: #fff8dc;
+}
+
+/*стили для пунктов списков */
+.number {
+    list-style-type: none;
+    padding: 10px;
+    margin: 2px;
+}
+
+.number_user {
+    border: 1px solid sandybrown;
+}
+
+.number_sort {
+    border: 1px solid darkolivegreen;
+}
+
+
+/*выделения списка с анимацией */
+.red {
+    color: white;
+    background-color: darkred;
+    transition: background 1s;
+}
+
+.grey {
+    color: white;
+    background-color: gray;
+    transition: background 2s;
+}
+

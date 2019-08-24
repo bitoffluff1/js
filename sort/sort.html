@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="sort.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="box-userNumbers">
+        <h2>Сортировка пузырьком</h2>
+        <h4>Вы можете наглядно познакомиться с алгоритмом сортировки простых одномерных массивов -
+            сортировки пузырьком.</h4>
+        <p>Введите целые числа через запятую без пробелов</p>
+        <input class="userNumbers" placeholder="12,18,19,25,18,3,74,1,36">
+        <button id="button" class="button">OK</button>
+    </div>
+    <div class="box-numbers">
+        <h4>Введенные числа:</h4>
+        <ul id="arrUser" class="arr arr_user"></ul>
+        <h4>Анимация пузырьковой сортировки:</h4>
+        <ul id="animation" class="arr"></ul>
+        <h4>Отсортированные числа:</h4>
+        <ul id="arrSort" class="arr arr_sort"></ul>
+    </div>
+</div>
+
+<script src="sort.js"></script>
+
+</body>
+</html>
