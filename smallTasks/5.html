@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+напишите функцию, которая проверяет переданную строку на палиндром.
+
+isPalindrome("Коту тащат утоК"); // true
+isPalindrome("Мало кукле дел – к уколам"); // true
+isPalindrome("Другая строка"); // false
+
+<script>
+
+    function isPalindrome(str) {
+        let arr = str.toLowerCase().split("");
+        arr = arr.filter((el) => {
+            if ((el >= "a" && el <= "я") || el === "ё") {
+                return el;
+            }
+        });
+
+        return arr.join("") === arr.reduceRight((prev, current) => prev + current);
+    }
+
+    console.log(isPalindrome("Коту тащат утоК"));
+    console.log(isPalindrome("Мало кукле дел – к уколам"));
+    console.log(isPalindrome("Другая строка"));
+
+</script>
+
+</body>
+</html>
