@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Фибоначчи. Напишите функцию, которая возвращает порядковое число в последовательности Фибоначчи.
+(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610)
+
+fibonacci(0) // 0
+fibonacci(2) // 1
+fibonacci(5) // 5
+
+<script>
+    "use strict";
+
+    function fibonacci(num) {
+        let arr = [];
+        for (let i = 0; i <= num; i++) {
+            if (arr.length === 0 || arr.length === 1) {
+                arr.push(i);
+            } else {
+                arr.push(arr[i - 1] + arr[i - 2]);
+            }
+        }
+        return arr[num];
+    }
+
+    console.log(fibonacci(0));
+
+</script>
+
+</body>
+</html>
